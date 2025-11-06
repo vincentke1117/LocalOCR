@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { Header } from './components/Header';
 import { FileUpload } from './components/FileUpload';
@@ -9,8 +8,10 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import { convertFile } from './services/ocrService';
 import { AppState, ProcessableFile, FileStatus } from './types';
 import { IconType } from './constants';
+import { HomePage } from './components/HomePage';
 
 export default function App() {
+  const [view, setView] = useState<'home' | 'app'>('home');
   const [processableFiles, setProcessableFiles] = useState<ProcessableFile[]>([]);
   const [appState, setAppState] = useState<AppState>(AppState.IDLE);
   const [activeFileId, setActiveFileId] = useState<string | null>(null);
@@ -76,6 +77,10 @@ export default function App() {
   }, [processableFiles, apiEndpoint]);
 
   const activeFile = processableFiles.find(pf => pf.id === activeFileId);
+
+  if (view === 'home') {
+    return <HomePage onGetStarted={() => setView('app')} />;
+  }
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-200 font-sans flex flex-col">
