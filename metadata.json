@@ -1,0 +1,5 @@
+{
+  "name": "Local Markdown Converter",
+  "description": "A web UI to convert local images and PDF files into structured Markdown text by leveraging a local PaddleOCR-powered Python API.",
+  "requestFramePermissions": []
+}
